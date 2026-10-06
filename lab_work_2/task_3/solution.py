@@ -1,4 +1,6 @@
 import re
+from collections import Counter
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -20,7 +22,7 @@ class NonUniformPizzeria:
                 if not line:
                     break
                 match_date_and_separator = re.search(r'^\d{2}[.\/]\d{2}[.\/]\d{4}[ ,;]', line)
-                # пропускаем если запись не содержит даты в нуженом формате
+                # пропускаем если запись не содержит даты в нужном формате
                 if not match_date_and_separator:
                      continue
                 group_date_and_separator = match_date_and_separator.group()
@@ -47,4 +49,25 @@ class NonUniformPizzeria:
         return transactions
     
     def solve(self) -> None:
-        pass
+        # а)
+        pizza_counter = Counter(self.transactions['name'])
+        sorted_pizza_counter = sorted(pizza_counter.items(), key=lambda item: item[1], reverse=True)
+        str_result_1 = 'а)\n'
+        for name, count in sorted_pizza_counter:
+             str_result_1 += f'{name} - {count}\n'
+        print(str_result_1.strip())
+        # б)
+        sorted_date_cost = {date: 0 for date in np.sort(np.unique(self.transactions['date']))}
+        for transaction in self.transactions:
+            sorted_date_cost[transaction['date']] += transaction['cost']
+        str_result_2 = 'б)\n'
+        for date, cost in sorted_date_cost.items():
+            formated_date = date.astype(datetime).strftime('%d.%m.%Y')
+            str_result_2 += f'{formated_date} {cost:.2f}\n'
+        print(str_result_2.strip())
+        # в)
+        index_most_expensive_pizza = np.argmax(self.transactions['cost'])
+        formated_date = self.transactions['date'][index_most_expensive_pizza].astype(datetime).strftime('%d.%m.%Y')
+        print(f'в)\n{formated_date} {self.transactions['name'][index_most_expensive_pizza]} {self.transactions['cost'][index_most_expensive_pizza]:.2f}')
+        # г)
+        print(f'г)\n{np.mean(self.transactions['cost']):.2f}')
