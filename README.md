@@ -1,1 +1,0 @@
-# pstu-data-analysis-technologies
