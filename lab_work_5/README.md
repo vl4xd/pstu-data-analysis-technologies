@@ -8,14 +8,23 @@
 
 ```text
 lab_work_5/
+├── charts/             # Сохраненные графики в форматах `html` и `png`
+│   ├── task_2.html
+│   ├── task_3.html
+│   ├── task_4.png
+│   ├── task_5.png
+│   ├── task_6.png
+│   ├── task_7.png
+│   ├── task_8.html
+│   └── task_9.html
 ├── data/
 │   └── weather1.csv 
 ├── docs/
-│   └── Lab05.pdf                           # Условие лабораторной работы
+│   └── Lab05.pdf       # Условие лабораторной работы
 ├── .gitignore
 ├── README.md
-├── requirements.txt                        # Зависимости
-└── solution.ipynb                          # Решение (отчет) лабораторной работы
+├── requirements.txt1   # Зависимости
+└── solution.ipynb      # Решение (отчет) лабораторной работы
 ```
 
 ## Установка
